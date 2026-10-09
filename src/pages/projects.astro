@@ -3,49 +3,72 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 ---
 
-<BaseLayout title = "Projects" sideBarActiveItemID="projects">
+<BaseLayout title="Dự án" sideBarActiveItemID="projects">
+  <div class="mb-8">
+    <div class="text-3xl w-full font-bold mb-3">Dự án & lĩnh vực</div>
+    <p class="text-lg">
+      Các nhóm công việc và công nghệ tôi đang tập trung: hạ tầng CNTT, network,
+      server, camera, quản lý tài sản, monitoring và automation.
+    </p>
+  </div>
+
   <div>
-    <div class="text-3xl w-full font-bold mb-5">Projects Header</div>
+    <div class="text-2xl w-full font-bold mb-3">Hạ tầng & vận hành</div>
   </div>
 
   <HorizontalCard
-    title="Demo Project 1"
+    title="IT Infrastructure"
     img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
+    desc="Thiết kế, vận hành và chuẩn hóa hạ tầng CNTT: server, switch, Wi-Fi, phân quyền truy cập, tài liệu hệ thống và xử lý sự cố."
+    url="/blog/"
+    badge="IT"
   />
   <div class="divider my-0"></div>
+
   <HorizontalCard
-    title="Demo Project 2"
+    title="Network & VLAN"
     img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
+    desc="Phân tách VLAN, mạng nội bộ, Wi-Fi khách, UniFi, MikroTik, switch managed, firewall rule và giám sát kết nối."
+    url="/blog/"
+    badge="NETWORK"
+  />
+  <div class="divider my-0"></div>
+
+  <HorizontalCard
+    title="Camera & Security"
+    img="/post_img.webp"
+    desc="Hệ thống camera IP, NVR, PoE, lưu trữ, phân quyền xem camera và theo dõi trạng thái thiết bị."
+    url="/blog/"
+    badge="CCTV"
   />
 
   <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Projects Header</div>
+    <div class="text-2xl w-full font-bold mb-3 mt-10">Quản trị & tự động hóa</div>
   </div>
 
   <HorizontalCard
-    title="Demo Project 3"
+    title="GLPI Asset Management"
     img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
+    desc="Quản lý máy tính, thiết bị mạng, license, vị trí, phòng ban, trạng thái tài sản và lịch sử bảo trì trên GLPI."
+    url="/blog/"
+    badge="GLPI"
   />
   <div class="divider my-0"></div>
+
   <HorizontalCard
-    title="Demo Project 4"
+    title="Monitoring & Alerting"
     img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
+    desc="Theo dõi website, server, network, SNMP, uptime và cảnh báo sự cố bằng các công cụ monitoring phù hợp."
+    url="/blog/"
+    badge="MONITORING"
   />
   <div class="divider my-0"></div>
+
   <HorizontalCard
-    title="Demo Project 5"
+    title="Automation & Self-hosted Tools"
     img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
+    desc="GitHub, Python, Docker, bot, API và các dịch vụ self-hosted phục vụ công việc quản trị hệ thống."
+    url="https://github.com/hoangthang0106"
+    badge="AUTOMATION"
   />
 </BaseLayout>
