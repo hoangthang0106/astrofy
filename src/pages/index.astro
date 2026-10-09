@@ -12,48 +12,61 @@ const last_posts = posts.slice(0, 3);
 <BaseLayout sideBarActiveItemID="home">
   <div class="pb-12 mt-5">
     <div class="text-xl py-1">Xin chào 👋</div>
-    <div class="text-5xl font-bold">I'm Luu Data</div>
-    <div class="text-3xl py-3 font-bold">  IT Infrastructure • Network • Server • Automation</div>
+    <div class="text-5xl font-bold">I'm Hoàng Thắng</div>
+    <div class="text-3xl py-3 font-bold">IT Infrastructure • Network • Server • Automation</div>
+
     <div class="py-2">
       <text class="text-lg">
         Chào mừng đến với website cá nhân của tôi.
-        Đây là nơi tôi lưu trữ các dự án, kinh nghiệm và nội dung liên quan
+        Đây là nơi lưu trữ các dự án, kinh nghiệm và nội dung liên quan
         đến hệ thống IT, network, server, camera, automation và công nghệ.
       </text>
     </div>
+
     <div class="mt-8">
-      <a class="btn" href="/projects">    Xem dự án   </a>
-      <a href="https://github.com/luudata"  target="_blank"    class="btn btn-outline ml-5"  >
+      <a class="btn" href="/projects">
+        Xem dự án
+      </a>
+
+      <a
+        href="https://github.com/hoangthang0106"
+        target="_blank"
+        class="btn btn-outline ml-5"
+      >
+        GitHub
       </a>
     </div>
   </div>
+
   <div>
-    <div class="text-3xl w-full font-bold mb-2">Dự Án của T {"</>"}</div>
+    <div class="text-3xl w-full font-bold mb-2">Dự án nổi bật {"</>"}</div>
   </div>
 
   <HorizontalCard
     title="IT Infrastructure"
     img="/post_img.webp"
     desc="Hệ thống server, network, VLAN, firewall, monitoring và quản trị hạ tầng."
-  url="/projects"
+    url="/projects"
   />
   <div class="divider my-0"></div>
+
   <HorizontalCard
     title="Camera & Security"
     img="/post_img.webp"
     desc="Hệ thống camera IP, NVR, PoE, giám sát và quản lý thiết bị."
-  url="/projects"
+    url="/projects"
   />
   <div class="divider my-0"></div>
+
   <HorizontalCard
     title="Automation"
     img="/post_img.webp"
     desc="Các công cụ tự động hóa, bot, API và workflow."
-  url="/projects"
+    url="/projects"
   />
 
   <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Bài viết mới nhất</div>
   </div>
 
   {
