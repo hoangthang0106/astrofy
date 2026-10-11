@@ -2,11 +2,14 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
-import createSlug from "../lib/createSlug"
+import createSlug from "../lib/createSlug";
 
-const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const last_posts = posts.slice(0, 3);
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const lastPosts = posts.slice(0, 3);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
 ---
 
 <BaseLayout sideBarActiveItemID="home">
@@ -16,22 +19,19 @@ const last_posts = posts.slice(0, 3);
     <div class="text-3xl py-3 font-bold">IT Infrastructure • Network • Server • Automation</div>
 
     <div class="py-2">
-      <text class="text-lg">
-        Chào mừng đến với website cá nhân của tôi.
-        Đây là nơi lưu trữ các dự án, kinh nghiệm và nội dung liên quan
-        đến hệ thống IT, network, server, camera, automation và công nghệ.
-      </text>
+      <p class="text-lg">
+        Đây là website cá nhân nơi tôi lưu trữ dự án, kinh nghiệm và ghi chú kỹ thuật
+        về hạ tầng CNTT, network, server, camera, monitoring và automation.
+      </p>
     </div>
 
-    <div class="mt-8">
-      <a class="btn" href="/projects">
-        Xem dự án
-      </a>
-
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a class="btn" href={withBase("/projects")}>Xem dự án</a>
       <a
         href="https://github.com/hoangthang0106"
         target="_blank"
-        class="btn btn-outline ml-5"
+        rel="noreferrer"
+        class="btn btn-outline"
       >
         GitHub
       </a>
@@ -45,24 +45,27 @@ const last_posts = posts.slice(0, 3);
   <HorizontalCard
     title="IT Infrastructure"
     img="/post_img.webp"
-    desc="Hệ thống server, network, VLAN, firewall, monitoring và quản trị hạ tầng."
-    url="/projects"
+    desc="Server, network, VLAN, firewall, monitoring và quản trị hạ tầng."
+    url={withBase("/projects")}
+    target="_self"
   />
   <div class="divider my-0"></div>
 
   <HorizontalCard
     title="Camera & Security"
     img="/post_img.webp"
-    desc="Hệ thống camera IP, NVR, PoE, giám sát và quản lý thiết bị."
-    url="/projects"
+    desc="Camera IP, NVR, PoE, giám sát và quản lý thiết bị."
+    url={withBase("/projects")}
+    target="_self"
   />
   <div class="divider my-0"></div>
 
   <HorizontalCard
     title="Automation"
     img="/post_img.webp"
-    desc="Các công cụ tự động hóa, bot, API và workflow."
-    url="/projects"
+    desc="GitHub, Python, bot, API và các workflow tự động hóa."
+    url={withBase("/projects")}
+    target="_self"
   />
 
   <div>
@@ -70,13 +73,13 @@ const last_posts = posts.slice(0, 3);
   </div>
 
   {
-    last_posts.map((post) => (
+    lastPosts.map((post) => (
       <>
         <HorizontalCard
           title={post.data.title}
           img={post.data.heroImage}
           desc={post.data.description}
-          url={"/blog/" + createSlug(post.data.title, post.slug)}
+          url={withBase("/blog/" + createSlug(post.data.title, post.slug))}
           target="_self"
           badge={post.data.badge}
         />

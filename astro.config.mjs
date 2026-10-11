@@ -1,10 +1,14 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
+import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 
-// https://astro.build/config
+const site = process.env.SITE_URL || "http://localhost:4321";
+const base = process.env.BASE_PATH || "/";
+
 export default defineConfig({
-  site: 'https://astrofy-template.netlify.app',
-  integrations: [mdx(), sitemap(), tailwind()]
+  site,
+  base,
+  output: "static",
+  integrations: [mdx(), sitemap(), tailwind()],
 });
