@@ -1,46 +1,18 @@
 ---
 const { title, img, desc, url, badge, tags, target = "_blank" } = Astro.props;
 import { Image } from "astro:assets";
-
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
-const resolvedImg =
-  img && !/^https?:\/\//i.test(img) && img.startsWith("/") ? withBase(img) : img;
-const tagUrl = url?.split("/").slice(0, -1).join("/") + "/tag";
+const resolvedImg = img && !/^https?:\/\//i.test(img) && img.startsWith("/") ? withBase(img) : img;
 ---
-
-<div class="rounded-lg bg-base-100 hover:shadow-xl transition ease-in-out hover:scale-[102%]">
-  <a href={url} target={target}>
-    <div class="hero-content flex-col md:flex-row">
-      {
-        resolvedImg && (
-          <Image
-            src={resolvedImg}
-            width={750}
-            height={422}
-            format="webp"
-            alt={title}
-            class="max-w-full md:max-w-[13rem] rounded-lg"
-          />
-        )
-      }
-      <div class="grow w-full">
-        <h1 class="text-xl font-bold">
-          {title}
-          {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
-        </h1>
-        <p class="py-1 text-1xl">{desc}</p>
-        <div class="card-actions justify-end">
-          {
-            tags &&
-              tags.map((tag) => (
-                <a href={`${tagUrl}/${tag}`} class="badge badge-outline">
-                  {tag}
-                </a>
-              ))
-          }
-        </div>
-      </div>
+<article class="rounded-lg bg-base-100 border border-base-200 my-3 p-4">
+  <div class="flex flex-col md:flex-row gap-5">
+    {resolvedImg && <Image src={resolvedImg} width={750} height={422} format="webp" alt="" class="max-w-full md:max-w-[13rem] rounded-lg object-cover" />}
+    <div class="grow w-full">
+      <h2 class="text-xl font-bold"><a href={url} target={target} rel={target === "_blank" ? "noopener noreferrer" : undefined} class="hover:underline">{title}</a></h2>
+      {badge && <span class="badge badge-outline my-2">{badge}</span>}
+      <p class="py-1">{desc}</p>
+      {tags && <div class="flex flex-wrap gap-2 mt-3">{tags.map((tag: string) => <a href={withBase(`blog/tag/${tag}/`)} class="badge badge-outline">{tag}</a>)}</div>}
     </div>
-  </a>
-</div>
+  </div>
+</article>

@@ -6,9 +6,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
 ---
 
-<BaseLayout title="Dự án" sideBarActiveItemID="projects">
+<BaseLayout title="Lĩnh vực | Hoàng Quốc Thắng" sideBarActiveItemID="projects">
   <div class="mb-8">
-    <div class="text-3xl w-full font-bold mb-3">Dự án & lĩnh vực</div>
+    <div class="text-3xl w-full font-bold mb-3">Lĩnh vực & công nghệ</div>
     <p class="text-lg">
       Các nhóm công việc và công nghệ tôi tập trung: hạ tầng CNTT, network, server,
       camera, quản lý tài sản, monitoring và automation.
@@ -19,7 +19,6 @@ const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
 
   <HorizontalCard
     title="IT Infrastructure"
-    img="/post_img.webp"
     desc="Thiết kế, vận hành và chuẩn hóa hạ tầng CNTT: server, switch, Wi-Fi, phân quyền truy cập, tài liệu hệ thống và xử lý sự cố."
     url={withBase("/blog/")}
     target="_self"
@@ -29,7 +28,6 @@ const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
 
   <HorizontalCard
     title="Network & VLAN"
-    img="/post_img.webp"
     desc="Phân tách VLAN, mạng nội bộ, Wi-Fi khách, UniFi, MikroTik, switch managed, firewall rule và giám sát kết nối."
     url={withBase("/blog/")}
     target="_self"
@@ -39,7 +37,6 @@ const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
 
   <HorizontalCard
     title="Camera & Security"
-    img="/post_img.webp"
     desc="Camera IP, NVR, PoE, lưu trữ, phân quyền xem camera và theo dõi trạng thái thiết bị."
     url={withBase("/blog/")}
     target="_self"
@@ -50,7 +47,6 @@ const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
 
   <HorizontalCard
     title="GLPI Asset Management"
-    img="/post_img.webp"
     desc="Quản lý máy tính, thiết bị mạng, license, vị trí, phòng ban, trạng thái tài sản và lịch sử bảo trì trên GLPI."
     url={withBase("/blog/")}
     target="_self"
@@ -60,7 +56,6 @@ const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
 
   <HorizontalCard
     title="Monitoring & Alerting"
-    img="/post_img.webp"
     desc="Theo dõi website, server, network, SNMP, uptime và cảnh báo sự cố."
     url={withBase("/blog/")}
     target="_self"
@@ -70,7 +65,6 @@ const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
 
   <HorizontalCard
     title="Automation & Self-hosted Tools"
-    img="/post_img.webp"
     desc="GitHub, Python, Docker, bot, API và các dịch vụ self-hosted phục vụ quản trị hệ thống."
     url="https://github.com/hoangthang0106"
     badge="AUTOMATION"

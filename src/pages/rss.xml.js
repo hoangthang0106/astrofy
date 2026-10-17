@@ -3,7 +3,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug";
 
-export async function get(context) {
+export async function GET(context) {
   const blog = await getCollection("blog");
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 

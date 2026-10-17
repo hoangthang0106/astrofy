@@ -8,15 +8,18 @@ export interface Props {
   ogType?: string;
 }
 
-const { title, description, image = "/social_img.webp", ogType = "website" } = Astro.props;
+const { title, description, image = "/profile-card.svg", ogType = "website" } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 const imageUrl = new URL(withBase(image), Astro.site ?? Astro.url);
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="author" content="Hoàng Quốc Thắng" />
 <meta name="generator" content={Astro.generator} />
 
 <title>{title}</title>
@@ -24,13 +27,13 @@ const imageUrl = new URL(withBase(image), Astro.site ?? Astro.url);
 <meta name="description" content={description} />
 
 <meta property="og:type" content={ogType} />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
 
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:url" content={canonicalUrl} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={imageUrl} />

@@ -1,90 +1,35 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import HorizontalCard from "../components/HorizontalCard.astro";
 import { getCollection } from "astro:content";
 import createSlug from "../lib/createSlug";
-
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
-const lastPosts = posts.slice(0, 3);
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-const withBase = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
+const link = (path: string) => `${base}/${path.replace(/^\/+/, "")}`;
+const posts = (await getCollection("blog")).sort((a,b) => b.data.pubDate.valueOf()-a.data.pubDate.valueOf()).slice(0,3);
+const areas = [
+  ["01", "Hạ tầng & hệ thống mạng", "Vận hành mạng doanh nghiệp, VLAN, Wi-Fi, firewall và dịch vụ máy chủ.", "MikroTik · Cisco · UniFi"],
+  ["02", "Quản lý & hỗ trợ IT", "Quản lý tài sản, hỗ trợ người dùng và chuẩn hóa tài liệu vận hành.", "GLPI · Windows · Microsoft 365"],
+  ["03", "Camera & lưu trữ", "Làm việc với camera IP, đầu ghi, NAS và các nhu cầu sao lưu dữ liệu.", "Hikvision · Synology · PoE"],
+  ["04", "Homelab & tự động hóa", "Thử nghiệm dịch vụ tự host và tìm cách giảm những thao tác lặp lại.", "Proxmox · Docker · API"],
+];
 ---
-
 <BaseLayout sideBarActiveItemID="home">
-  <div class="pb-12 mt-5">
-    <div class="text-xl py-1">Xin chào 👋</div>
-    <div class="text-5xl font-bold">I'm Hoàng Thắng</div>
-    <div class="text-3xl py-3 font-bold">IT Infrastructure • Network • Server • Automation</div>
-
-    <div class="py-2">
-      <p class="text-lg">
-        Đây là website cá nhân nơi tôi lưu trữ dự án, kinh nghiệm và ghi chú kỹ thuật
-        về hạ tầng CNTT, network, server, camera, monitoring và automation.
-      </p>
+  <section class="profile-hero" aria-labelledby="intro-title">
+    <p class="eyebrow">GÓC CÁ NHÂN · CÔNG NGHỆ & CÔNG VIỆC</p>
+    <h1 id="intro-title">Hoàng Quốc Thắng<span>IT từ công việc đến homelab.</span></h1>
+    <p class="hero-summary">Tôi làm việc trong lĩnh vực công nghệ thông tin, tập trung vào hạ tầng mạng, máy chủ và hỗ trợ người dùng. Đây là nơi tôi giới thiệu bản thân và chia sẻ những ghi chú trong quá trình làm việc, học hỏi.</p>
+    <div class="hero-actions">
+      <a class="btn btn-neutral" href={link("cv")}>Về tôi <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-outline" href={link("blog/")}>Đọc ghi chú</a>
     </div>
-
-    <div class="mt-8 flex flex-wrap gap-3">
-      <a class="btn" href={withBase("/projects")}>Xem dự án</a>
-      <a
-        href="https://github.com/hoangthang0106"
-        target="_blank"
-        rel="noreferrer"
-        class="btn btn-outline"
-      >
-        GitHub
-      </a>
-    </div>
-  </div>
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">Dự án nổi bật {"</>"}</div>
-  </div>
-
-  <HorizontalCard
-    title="IT Infrastructure"
-    img="/post_img.webp"
-    desc="Server, network, VLAN, firewall, monitoring và quản trị hạ tầng."
-    url={withBase("/projects")}
-    target="_self"
-  />
-  <div class="divider my-0"></div>
-
-  <HorizontalCard
-    title="Camera & Security"
-    img="/post_img.webp"
-    desc="Camera IP, NVR, PoE, giám sát và quản lý thiết bị."
-    url={withBase("/projects")}
-    target="_self"
-  />
-  <div class="divider my-0"></div>
-
-  <HorizontalCard
-    title="Automation"
-    img="/post_img.webp"
-    desc="GitHub, Python, bot, API và các workflow tự động hóa."
-    url={withBase("/projects")}
-    target="_self"
-  />
-
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Bài viết mới nhất</div>
-  </div>
-
-  {
-    lastPosts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={withBase("/blog/" + createSlug(post.data.title, post.slug))}
-          target="_self"
-          badge={post.data.badge}
-        />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
+    <div class="hero-footnote">Hạ tầng CNTT / Hỗ trợ kỹ thuật / Tự động hóa</div>
+  </section>
+  <section class="profile-section" aria-labelledby="areas-title">
+    <div class="section-heading"><div><p class="eyebrow">CÔNG VIỆC & MỐI QUAN TÂM</p><h2 id="areas-title">Những lĩnh vực tôi tập trung</h2></div><a href={link("projects")}>Xem thêm →</a></div>
+    <div class="area-grid">{areas.map(([number,title,description,tools]) => <article class="area-card"><span class="area-number">{number}</span><h3>{title}</h3><p>{description}</p><small>{tools}</small></article>)}</div>
+  </section>
+  <section class="profile-section" aria-labelledby="notes-title">
+    <div class="section-heading"><div><p class="eyebrow">CHIA SẺ & HỌC HỎI</p><h2 id="notes-title">Ghi chú kỹ thuật</h2></div><a href={link("blog/")}>Tất cả bài viết →</a></div>
+    <div class="note-list">{posts.map(post => <a class="note-row" href={link("blog/"+createSlug(post.data.title,post.slug))}><div><span class="note-topic">{post.data.badge}</span><h3>{post.data.title}</h3><p>{post.data.description}</p></div><span aria-hidden="true">↗</span></a>)}</div>
+  </section>
+  <section class="contact-strip"><div><p class="eyebrow">KẾT NỐI</p><h2>Cùng trao đổi về công nghệ.</h2><p>Các dự án và mã nguồn công khai của tôi có trên GitHub.</p></div><a class="btn btn-neutral" href="https://github.com/hoangthang0106" target="_blank" rel="noopener noreferrer">GitHub ↗</a></section>
 </BaseLayout>

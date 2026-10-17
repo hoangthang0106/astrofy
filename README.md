@@ -1,61 +1,47 @@
-# Hoàng Thắng — Personal Website
+# Hoàng Quốc Thắng — Website cá nhân
 
-Website cá nhân về **IT Infrastructure, Network, Server, Camera, Monitoring và Automation**.
+Website tiếng Việt giới thiệu bản thân, lĩnh vực làm việc và ghi chú kỹ thuật. Được tùy biến từ Astrofy, sử dụng Astro, TailwindCSS và DaisyUI.
 
-## Nội dung
+## Cài qua Portainer
 
-- Trang chủ
-- Dự án & lĩnh vực
-- Blog / ghi chú kỹ thuật
-- Kinh nghiệm & kỹ năng
-- RSS feed
+1. **Stacks → Add stack → Repository**.
+2. Repository URL: `https://github.com/hoangthang0106/astrofy`.
+3. Repository reference: `refs/heads/main`.
+4. Compose path: `compose.yaml`.
+5. Trong Environment variables, đặt `SITE_URL` thành URL public thực tế của web (bao gồm `https://`). Khi thử trong LAN có thể dùng URL LAN thực tế.
+6. Deploy stack. Mở `http://IP-UBUNTU:8088`.
 
-## Công nghệ
+Docker build tải thư viện và build web một lần; container chạy bằng user không phải root. Không cần database. Cần kết nối Internet trong lúc build. Nếu Portainer chạy Swarm, cần build/push image trước; Compose này dành cho Docker Standalone.
 
-- Astro
-- TailwindCSS
-- DaisyUI
-- Markdown Content Collections
+Để mở từ xa: thêm route HTTP trong Cloudflare Tunnel tới `IP-UBUNTU:8088`, dùng hostname đã chọn trong SITE_URL. Không dùng tên miền quản trị Portainer cho website.
 
-## Chạy local
+Khi sửa code: cập nhật stack từ GitHub và bật tùy chọn rebuild image nếu giao diện có. Nếu chỉ restart container, nội dung sẽ không được build lại.
 
-Yêu cầu Node.js 20+ và pnpm 8+.
+## Sửa nội dung
 
-```bash
-pnpm install
+- `src/pages/index.astro`: trang chủ.
+- `src/pages/cv.astro`: giới thiệu bản thân.
+- `src/pages/projects.astro`: lĩnh vực và công nghệ.
+- `src/content/blog/`: ghi chú Markdown.
+- `src/config.ts`: tên và mô tả web.
+
+Không đưa tài khoản, mật khẩu, IP nội bộ hay cấu hình doanh nghiệp lên repo công khai. Thông tin liên hệ hiện dùng GitHub; chưa khai báo số điện thoại/email cá nhân.
+
+## Chạy và kiểm tra local
+
+Node.js 22, pnpm 8.15.9:
+
+```sh
+corepack enable
+corepack prepare pnpm@8.15.9 --activate
+pnpm install --frozen-lockfile
 pnpm dev
-```
-
-Mở địa chỉ Astro hiển thị trong terminal, mặc định là:
-
-```text
-http://localhost:4321
-```
-
-## Build production
-
-```bash
 pnpm build
-pnpm preview
+node server.mjs
 ```
 
-Thư mục build:
+Server nhận PORT hoặc SERVER_PORT (mặc định 4321), có `/healthz` và trang 404. SITE_URL và BASE_PATH là biến **lúc build**; đổi giá trị cần build lại.
 
-```text
-dist/
-```
+## License
 
-Đây là **static website**, phù hợp để deploy lên Cloudflare Pages, GitHub Pages, Netlify hoặc Vercel; không cần VPS/Node process chạy 24/7.
-
-### Biến môi trường khi deploy
-
-- `SITE_URL`: URL public của website, ví dụ `https://example.com`
-- `BASE_PATH`: chỉ cần khi website chạy dưới subpath, ví dụ `/astrofy` trên GitHub Pages
-
-## GitHub
-
-https://github.com/hoangthang0106/astrofy
-
-## License / Credits
-
-Dự án được tùy biến từ [Astrofy](https://github.com/manuelernestog/astrofy), phát hành theo MIT License. Xem file `LICENSE`.
+MIT. Gốc: https://github.com/manuelernestog/astrofy. Giữ thông tin bản quyền trong LICENSE.
